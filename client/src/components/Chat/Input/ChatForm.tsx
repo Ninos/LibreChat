@@ -169,6 +169,7 @@ const ChatForm = memo(function ChatForm({
 }: ChatFormProps) {
   const submitButtonRef = useRef<HTMLButtonElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const approvalTriggerRef = useRef<HTMLButtonElement>(null);
   /** The palette anchors to the whole composer, not to its own button, so it
    *  spans the composer width and sits flush above it. */
   const composerBoxRef = useRef<HTMLDivElement>(null);
@@ -803,7 +804,10 @@ const ChatForm = memo(function ChatForm({
               <AskUserQuestionPopover conversationId={conversationId} textAreaRef={textAreaRef} />
             )}
             {index === 0 && conversationId != null && (
-              <PendingToolApprovalPanel conversationId={conversationId} />
+              <PendingToolApprovalPanel
+                conversationId={conversationId}
+                triggerRef={approvalTriggerRef}
+              />
             )}
             <SkillsCommand
               index={index}
@@ -1007,7 +1011,10 @@ const ChatForm = memo(function ChatForm({
                         disabled={disableInputs}
                       />
                       {index === 0 && conversationId != null && (
-                        <PendingToolApprovalButton conversationId={conversationId} />
+                        <PendingToolApprovalButton
+                          conversationId={conversationId}
+                          triggerRef={approvalTriggerRef}
+                        />
                       )}
                     </div>
                   }
